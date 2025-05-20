@@ -50,9 +50,20 @@ const ParticlesGrab = ({ config }) => {
         p.x += p.vx;
         p.y += p.vy;
 
-        // Bounce on edges
-        if (p.x < 0 || p.x > width) p.vx *= -1;
-        if (p.y < 0 || p.y > height) p.vy *= -1;
+if ((p.x < 0 || p.x > width) || (p.y < 0 || p.y > height)) {
+  // Remove the current particle
+  particles.splice(particles.indexOf(p), 1);
+
+  // Add a new one
+  particles.push({
+    x: Math.random() * width,
+    y: Math.random() * height,
+    vx: (Math.random() - 0.5) * 2.5,
+    vy: (Math.random() - 0.5) * 2.5,
+  });
+}
+
+ 
 
         // Draw particle
         ctx.beginPath();
@@ -74,6 +85,26 @@ const ParticlesGrab = ({ config }) => {
             ctx.stroke();
           }
         }
+
+// Draw lines between nearby particles
+for (let i = 0; i < particles.length; i++) {
+  for (let j = i + 1; j < particles.length; j++) {
+    const dx = particles[i].x - particles[j].x;
+    const dy = particles[i].y - particles[j].y;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+
+    if (dist < 200) {
+      ctx.beginPath();
+      ctx.moveTo(particles[i].x, particles[i].y);
+      ctx.lineTo(particles[j].x, particles[j].y);
+      ctx.strokeStyle = `rgba(${colorRgb.r}, ${colorRgb.g}, ${colorRgb.b}, ${0.01 * lineOpacity * (1 - dist / lineDistance)})`;
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+  }
+}
+
+
       });
 
       animationRef.current = requestAnimationFrame(draw);
