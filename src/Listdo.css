@@ -1,0 +1,86 @@
+.Tlc {
+    position: relative;
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #f4f4f4;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+.Tlc input[type="text"] {
+  width: 70%;
+  padding: 10px;
+  margin-right: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.add-btn {
+  padding: 10px 15px;
+  font-size: 16px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.add-btn:hover {
+  background-color: #218838;
+}
+
+ol {
+  padding-left: 20px;
+  margin-top: 20px;
+}
+
+li {
+  margin: 10px 0;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.taskName {
+  flex: 1;
+  color: black;
+}
+
+button.Dlt,
+button.Up,
+button.Down {
+  margin-left: 8px;
+  padding: 6px 10px;
+  font-size: 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button.Dlt {
+  background-color: #dc3545;
+  color: white;
+}
+
+button.Dlt:hover {
+  background-color: #c82333;
+}
+
+button.Up,
+button.Down {
+  background-color: #007bff;
+  color: white;
+}
+
+button.Up:hover,
+button.Down:hover {
+  background-color: #0056b3;
+}

@@ -11,10 +11,15 @@ const ParticlesGrab = ({ config }) => {
     const ctx = canvasEl.getContext('2d');
     const pxratio = window.devicePixelRatio || 1;
 
-    let width = canvasEl.offsetWidth * pxratio;
-    let height = canvasEl.offsetHeight * pxratio;
-    canvasEl.width = width;
-    canvasEl.height = height;
+    // Use window size instead of offsetWidth/offsetHeight
+let width = canvasEl.parentElement.clientWidth * pxratio;
+let height = document.documentElement.scrollHeight * pxratio;
+
+canvasEl.style.width = '100%';
+canvasEl.style.height = '100%';
+canvasEl.width = width;
+canvasEl.height = height;
+
 
     const particles = [];
 
@@ -121,12 +126,15 @@ for (let i = 0; i < particles.length; i++) {
       mouse.y = null;
     };
 
-    const handleResize = () => {
-      width = canvasEl.offsetWidth * pxratio;
-      height = canvasEl.offsetHeight * pxratio;
-      canvasEl.width = width;
-      canvasEl.height = height;
-    };
+   const handleResize = () => {
+  width = canvasEl.parentElement.clientWidth * pxratio;
+height = document.documentElement.scrollHeight * pxratio;
+  canvasEl.style.width = '100%';
+  canvasEl.style.height = '100%';
+  canvasEl.width = width;
+  canvasEl.height = height;
+};
+
 
     window.addEventListener('resize', handleResize);
     canvasEl.addEventListener('mousemove', handleMouseMove);
@@ -143,7 +151,7 @@ for (let i = 0; i < particles.length; i++) {
   }, [config]);
 
   return (
-    <div style={{ width: '100%', height: '100%', position: 'absolute', zIndex: 0 }}>
+    <div style={{ width: '100%', height: `${document.body.scrollHeight}px`, position: 'absolute', top: 0, left: 0, zIndex: 0 }}>
       <canvas
         ref={canvasRef}
         style={{ width: '100%', height: '100%', display: 'block' }}
